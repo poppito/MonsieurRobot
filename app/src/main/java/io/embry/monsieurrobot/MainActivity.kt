@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun showReport(report: String) {
         txt_report.text = report
+        txt_report.setTextColor(resources.getColor(android.R.color.black))
     }
 
     override fun enableSubmitButton(enable: Boolean) {

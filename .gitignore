@@ -2,7 +2,8 @@
 *.apk
 *.ap_
 
-!src/main/res/*
+!app/src/main/res/
+!AndroidManifest.xml
 
 # Files for the ART/Dalvik VM
 *.dex

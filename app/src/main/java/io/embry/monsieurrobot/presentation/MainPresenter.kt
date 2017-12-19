@@ -55,9 +55,7 @@ class MainPresenter {
             }
         } else {
             if (sanitiseInput(command)) {
-                usecases.getRobotPositionReport()
-            } else {
-                view.showInvalidCommandError()
+                view.showReport(usecases.getRobotPositionReport())
             }
         }
     }
@@ -79,6 +77,7 @@ class MainPresenter {
         if (command.startsWith(Usecases.moveCommand, true)) {
            if (!usecases.moveRobot()) {
                view.showOutOfBoundsError()
+               return false
            } else {
                return true
            }
@@ -88,7 +87,7 @@ class MainPresenter {
             view.showReport(usecases.getRobotPositionReport())
             return true
         }
-
+        view.showInvalidCommandError()
         return false
     }
 

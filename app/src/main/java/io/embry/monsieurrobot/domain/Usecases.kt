@@ -27,34 +27,38 @@ class Usecases constructor(val robot: Robot) {
     }
 
     fun rotateRobotLeft() {
-        if (robot.direction.equals(east)) {
+        if (robot.direction.equals(east, true)) {
             robot.direction = south
+            return
         }
-        if (robot.direction.equals(west)) {
+        if (robot.direction.equals(west, true)) {
             robot.direction = north
+            return
         }
-        if (robot.direction.equals(north)) {
+        if (robot.direction.equals(north, true)) {
             robot.direction = east
+            return
         }
-        if (robot.direction.equals(south)) {
+        if (robot.direction.equals(south, true)) {
             robot.direction = west
+            return
         }
     }
 
     fun rotateRobotRight() {
-        if (robot.direction.equals(east.toLowerCase())) {
+        if (robot.direction.equals(east, true)) {
             robot.direction = north
             return
         }
-        if (robot.direction.equals(west.toLowerCase())) {
+        if (robot.direction.equals(west, true)) {
             robot.direction = south
             return
         }
-        if (robot.direction.equals(north.toLowerCase())) {
+        if (robot.direction.equals(north, true)) {
             robot.direction = west
             return
         }
-        if (robot.direction.equals(south.toLowerCase())) {
+        if (robot.direction.equals(south, true)) {
             robot.direction = east
             return
         }
@@ -72,19 +76,19 @@ class Usecases constructor(val robot: Robot) {
     }
 
     fun moveRobot(): Boolean {
-        if (robot.direction.toLowerCase() == east.toLowerCase() && robot.x >= 0 && robot.x <= 3) {
+        if ((robot.direction.equals(east, true)) && robot.x >= 0 && robot.x <= 3) {
             robot.x++
             return true
         }
-        if (robot.direction.toLowerCase() == west.toLowerCase() && robot.x >= 1 && robot.x <= 4) {
+        if (robot.direction.equals(west, true) && robot.x >= 1 && robot.x <= 4) {
             robot.x--
             return true
         }
-        if (robot.direction.toLowerCase() == north.toLowerCase() && robot.y >= 0 && robot.y <= 3) {
+        if (robot.direction.equals(north, true) && robot.y >= 0 && robot.y <= 3) {
             robot.y++
             return true
         }
-        if (robot.direction.toLowerCase() == south.toLowerCase() && robot.y >= 1 && robot.y <= 4) {
+        if (robot.direction.equals(south, true) && robot.y >= 1 && robot.y <= 4) {
             robot.y--
             return true
         }
