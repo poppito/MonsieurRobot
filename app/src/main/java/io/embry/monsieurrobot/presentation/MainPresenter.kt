@@ -64,8 +64,7 @@ class MainPresenter {
 
     private fun sanitiseInput(command: String): Boolean {
         if (command.startsWith(Usecases.placeCommand)) {
-            runPlaceCommand(command)
-            return true
+            return runPlaceCommand(command)
         }
         if (command.startsWith(Usecases.rotateLeft, true)) {
             usecases.rotateRobotLeft()
@@ -78,8 +77,9 @@ class MainPresenter {
         }
 
         if (command.startsWith(Usecases.moveCommand, true)) {
-            usecases.moveRobot()
-            return true
+           if (!usecases.moveRobot()) {
+               view.showOutOfBoundsError()
+           }
         }
 
         if (command.startsWith(Usecases.report, true)) {
@@ -95,7 +95,7 @@ class MainPresenter {
         sanitisedCommand = sanitisedCommand.replace(" ", "")
         sanitisedCommand = sanitisedCommand.replace(Usecases.placeCommand.toLowerCase(), "")
         val placementList = sanitisedCommand.split(",")
-        if (placementList.size == 2) {
+        if (placementList.size == 3) {
             val direction = placementList[2]
 
             if (direction.startsWith(Usecases.east, true) ||

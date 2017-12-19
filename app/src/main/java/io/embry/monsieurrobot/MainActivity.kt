@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity(),
         if (s.startsWith(Usecases.placeCommand, true) ||
                 s.startsWith(Usecases.moveCommand, true) ||
                 s.startsWith(Usecases.rotateRight, true) ||
-                s.startsWith(Usecases.rotateLeft, true)) {
+                s.startsWith(Usecases.rotateLeft, true) ||
+                s.startsWith(Usecases.report, true)) {
             presenter.enableInput(true)
             commandEntered = s.toString()
         } else {
