@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun showOutOfBoundsError() {
         txt_report.text = resources.getString(R.string.txt_error_out_of_bounds)
+        txt_report.setTextColor(resources.getColor(android.R.color.holo_red_dark))
     }
 
     //endregion

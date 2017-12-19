@@ -117,16 +117,13 @@ class MainPresenter {
                     return false
                 }
 
-            } else {
-                return false
             }
 
-        } else {
-            return false
         }
+        return false
     }
 
-    //endregion
+//endregion
 
 
     interface ViewSurface {
