@@ -50,6 +50,8 @@ class MainPresenter {
             if (!command.startsWith(Usecases.placeCommand, true)) {
                 view.showPlacementError()
                 return
+            } else {
+                runPlaceCommand(command)
             }
         } else {
             if (sanitiseInput(command)) {
@@ -62,7 +64,7 @@ class MainPresenter {
 
     private fun sanitiseInput(command: String): Boolean {
         if (command.startsWith(Usecases.placeCommand)) {
-            hasRobotBeenPlaced = true
+            runPlaceCommand(command)
             return true
         }
         if (command.startsWith(Usecases.rotateLeft, true)) {
@@ -88,6 +90,44 @@ class MainPresenter {
         return false
     }
 
+    private fun runPlaceCommand(command: String): Boolean {
+        var sanitisedCommand = command.toLowerCase()
+        sanitisedCommand = sanitisedCommand.replace(" ", "")
+        sanitisedCommand = sanitisedCommand.replace(Usecases.placeCommand.toLowerCase(), "")
+        val placementList = sanitisedCommand.split(",")
+        if (placementList.size == 2) {
+            val direction = placementList[2]
+
+            if (direction.startsWith(Usecases.east, true) ||
+                    direction.startsWith(Usecases.west, true) ||
+                    direction.startsWith(Usecases.north, true) ||
+                    direction.startsWith(Usecases.south, true)) {
+
+                try {
+                    val x = placementList[0].toInt()
+                    val y = placementList[1].toInt()
+                    if (!usecases.placeRobot(direction, x, y)) {
+                        view.showOutOfBoundsError()
+                        return false
+                    } else {
+                        if (!hasRobotBeenPlaced) {
+                            hasRobotBeenPlaced = true
+                        }
+                        return true
+                    }
+                } catch (exception: NumberFormatException) {
+                    return false
+                }
+
+            } else {
+                return false
+            }
+
+        } else {
+            return false
+        }
+    }
+
     //endregion
 
 
@@ -96,5 +136,6 @@ class MainPresenter {
         fun showInvalidCommandError()
         fun showReport(report: String)
         fun enableSubmitButton(enable: Boolean)
+        fun showOutOfBoundsError()
     }
 }

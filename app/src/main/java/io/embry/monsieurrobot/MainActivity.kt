@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity(),
         txt_report.text = resources.getString(R.string.txt_invalid_command)
     }
 
+    override fun showOutOfBoundsError() {
+        txt_report.text = resources.getString(R.string.txt_error_out_of_bounds)
+    }
+
     //endregion
 
 
@@ -58,6 +62,7 @@ class MainActivity : AppCompatActivity(),
                 s.startsWith(Usecases.rotateRight, true) ||
                 s.startsWith(Usecases.rotateLeft, true)) {
             presenter.enableInput(true)
+            commandEntered = s.toString()
         } else {
             presenter.enableInput(false)
         }
