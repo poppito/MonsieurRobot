@@ -20,6 +20,14 @@ class Usecases constructor(val robot: Robot) {
         val rotateLeft = "LEFT"
         val rotateRight = "RIGHT"
         val report = "REPORT"
+
+
+        fun validateDirectionText(direction: String): Boolean {
+            return direction.startsWith(Usecases.east, true) ||
+                    direction.startsWith(Usecases.west, true) ||
+                    direction.startsWith(Usecases.north, true) ||
+                    direction.startsWith(Usecases.south, true)
+        }
     }
 
     fun getRobotPositionReport(): String {

@@ -2,6 +2,7 @@ package io.embry.monsieurrobot.presentation
 
 import io.embry.monsieurrobot.data.Robot
 import io.embry.monsieurrobot.domain.Usecases
+import io.embry.monsieurrobot.domain.Usecases.Companion.validateDirectionText
 
 /**
  * Presentation logic for the one
@@ -75,12 +76,12 @@ class MainPresenter {
         }
 
         if (command.startsWith(Usecases.moveCommand, true)) {
-           if (!usecases.moveRobot()) {
-               view.showOutOfBoundsError()
-               return false
-           } else {
-               return true
-           }
+            if (!usecases.moveRobot()) {
+                view.showOutOfBoundsError()
+                return false
+            } else {
+                return true
+            }
         }
 
         if (command.startsWith(Usecases.report, true)) {
@@ -92,18 +93,13 @@ class MainPresenter {
     }
 
     private fun runPlaceCommand(command: String): Boolean {
-        var sanitisedCommand = command.toLowerCase()
-        sanitisedCommand = sanitisedCommand.replace(" ", "")
+        var sanitisedCommand = command.replace(" ", "")
         sanitisedCommand = sanitisedCommand.replace(Usecases.placeCommand.toLowerCase(), "")
         val placementList = sanitisedCommand.split(",")
         if (placementList.size == 3) {
             val direction = placementList[2]
 
-            if (direction.startsWith(Usecases.east, true) ||
-                    direction.startsWith(Usecases.west, true) ||
-                    direction.startsWith(Usecases.north, true) ||
-                    direction.startsWith(Usecases.south, true)) {
-
+            if (validateDirectionText(direction)) {
                 try {
                     val x = placementList[0].toInt()
                     val y = placementList[1].toInt()
@@ -114,6 +110,7 @@ class MainPresenter {
                         if (!hasRobotBeenPlaced) {
                             hasRobotBeenPlaced = true
                         }
+                        view.showReport(usecases.getRobotPositionReport())
                         return true
                     }
                 } catch (exception: NumberFormatException) {
