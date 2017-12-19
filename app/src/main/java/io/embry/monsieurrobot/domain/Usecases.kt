@@ -46,17 +46,21 @@ class Usecases constructor(val robot: Robot) {
     }
 
     fun rotateRobotRight() {
-        if (robot.direction.equals(east)) {
+        if (robot.direction.equals(east.toLowerCase())) {
             robot.direction = north
+            return
         }
-        if (robot.direction.equals(west)) {
+        if (robot.direction.equals(west.toLowerCase())) {
             robot.direction = south
+            return
         }
-        if (robot.direction.equals(north)) {
+        if (robot.direction.equals(north.toLowerCase())) {
             robot.direction = west
+            return
         }
-        if (robot.direction.equals(south)) {
+        if (robot.direction.equals(south.toLowerCase())) {
             robot.direction = east
+            return
         }
     }
 
@@ -72,19 +76,19 @@ class Usecases constructor(val robot: Robot) {
     }
 
     fun moveRobot(): Boolean {
-        if (robot.direction == east && robot.x >= 0 && robot.x <= 3) {
+        if (robot.direction.toLowerCase() == east.toLowerCase() && robot.x >= 0 && robot.x <= 3) {
             robot.x++
             return true
         }
-        if (robot.direction == west && robot.x >= 1 && robot.x <= 4) {
+        if (robot.direction.toLowerCase() == west.toLowerCase() && robot.x >= 1 && robot.x <= 4) {
             robot.x--
             return true
         }
-        if (robot.direction == north && robot.y >= 0 && robot.y <= 3) {
+        if (robot.direction.toLowerCase() == north.toLowerCase() && robot.y >= 0 && robot.y <= 3) {
             robot.y++
             return true
         }
-        if (robot.direction == south && robot.y >= 1 && robot.y <= 4) {
+        if (robot.direction.toLowerCase() == south.toLowerCase() && robot.y >= 1 && robot.y <= 4) {
             robot.y--
             return true
         }

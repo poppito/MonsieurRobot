@@ -63,7 +63,7 @@ class MainPresenter {
     }
 
     private fun sanitiseInput(command: String): Boolean {
-        if (command.startsWith(Usecases.placeCommand)) {
+        if (command.startsWith(Usecases.placeCommand, true)) {
             return runPlaceCommand(command)
         }
         if (command.startsWith(Usecases.rotateLeft, true)) {
@@ -79,6 +79,8 @@ class MainPresenter {
         if (command.startsWith(Usecases.moveCommand, true)) {
            if (!usecases.moveRobot()) {
                view.showOutOfBoundsError()
+           } else {
+               return true
            }
         }
 
