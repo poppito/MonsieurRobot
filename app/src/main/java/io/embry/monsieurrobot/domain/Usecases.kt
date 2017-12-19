@@ -22,10 +22,6 @@ class Usecases constructor(val robot: Robot) {
         val report = "REPORT"
     }
 
-    fun provideRobot(): Robot {
-        return robot
-    }
-
     fun getRobotPositionReport(): String {
         return robot.getReport()
     }
