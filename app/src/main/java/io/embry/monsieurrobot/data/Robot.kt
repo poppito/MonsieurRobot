@@ -6,14 +6,12 @@ package io.embry.monsieurrobot.data
  *
  * @author harshoverseer
  */
-data class Robot constructor(var direction: Direction,
+data class Robot constructor(var direction: String,
                              var x : Int,
                              var y: Int) {
 
-    enum class Direction {
-        NORTH,
-        EAST,
-        WEST,
-        SOUTH
+
+    fun getReport() : String {
+        return String.format("%d,%d,%s", x,y,direction)
     }
 }
