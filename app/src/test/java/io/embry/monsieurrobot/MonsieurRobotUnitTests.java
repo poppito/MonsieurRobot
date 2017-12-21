@@ -15,14 +15,11 @@ import static org.junit.Assert.assertTrue;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class MonsieurRobotUnitTests {
-    private Usecases mUsecases = new Usecases(new Robot("North", 0, 1));
 
+    private Usecases mUsecases = new Usecases(new Robot("North", 0, 1));
 
     @Test
     public void givenPlaceCommand_whenValid_placeRobot() {
-        //given
-        Robot robot = mUsecases.getRobot();
-
         //when
         String direction = "NORTH";
         int x = 0;
@@ -35,9 +32,6 @@ public class MonsieurRobotUnitTests {
 
     @Test
     public void givenMoveCommand_whenValid_moveRobot() {
-        //given
-        Robot robot = mUsecases.getRobot();
-
         //when
         mUsecases.placeRobot("NORTH", 0, 2);
 
@@ -47,9 +41,6 @@ public class MonsieurRobotUnitTests {
 
     @Test
     public void givenMoveCommand_whenInvalid_doNotMoveRobot() {
-        //given
-        Robot robot = mUsecases.getRobot();
-
         //when
         mUsecases.placeRobot("SOUTH", 0, 0);
 
@@ -59,9 +50,6 @@ public class MonsieurRobotUnitTests {
 
     @Test
     public void givenLeftCommand_moveRobotLeft() {
-        //given
-        Robot robot = mUsecases.getRobot();
-
         //when
         mUsecases.placeRobot("EAST", 0, 4);
         mUsecases.rotateRobotLeft();
